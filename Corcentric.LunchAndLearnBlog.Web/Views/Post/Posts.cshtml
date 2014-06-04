@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Posts";
+}
+
+@model IEnumerable<Corcentric.LunchAndLearnBlog.Web.Models.Post>
+@using Corcentric.LunchAndLearnBlog.Web.Models
+   
+
+        @if (Model != null)
+        {
+            <div class="grid">
+                <table cellspacing="0" width="80%">
+                    <thead>
+                        <tr>
+                            <th>
+                                User Name
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Subject
+                            </th>
+                            <th>
+                                Body
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td align="left">
+                                    @item.UserName
+                                </td>
+                                <td align="left">
+                                    @item.PostDate
+                                </td>
+                                <td align="left">
+                                    @item.Subject
+                                </td>
+                                <td align="left">
+                                    @item.Body
+                                </td>
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                
+            </div>
+
+        }
+
+

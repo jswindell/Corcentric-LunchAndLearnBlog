@@ -1,0 +1,72 @@
+﻿@model Corcentric.LunchAndLearnBlog.Web.Models.LogonModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.Title = "LogonPage";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <title>Logon Page</title>
+</head>
+<body>
+
+                <form method="post" action="/Home/LogonPage" id="test">
+
+                <div class="editor-label">
+                    @Html.Label("Enter User Name:")
+                    @*<%: Html.LabelFor(m => m.UserName) %>*@
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.userName)
+
+                    @*<%: Html.TextBoxFor(m => m.UserName) %>
+                    <%: Html.ValidationMessageFor(m => m.UserName) %>*@
+                </div>
+                
+                <div class="editor-label">
+                    @Html.Label("Enter Password:")
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(m => m.password, new { id = "password" })
+
+                    @*@Html.TextBoxFor(m => m.password, new { id = "password" })*@
+                    @*<%: Html.PasswordFor(m => m.Password, new { id = "password" })%>
+                    <%: Html.ValidationMessageFor(m => m.Password) %>*@
+                </div>
+
+                    <input name="submit" id="LogonButton" type="submit" value="Click Here"/>
+                    <button id="newUser" " onclick="window.location = '/Users'; return false;">Create New User</button>
+                </form>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    var publicKey = @ViewBag.Key;
+
+    $(function () {
+        $('#test').submit(function () {
+            var passwordBox = $("#password");
+            var passwordValue = passwordBox.val();
+
+            var newPasswordBoxValue = "";
+            for(var counter = 0; counter < passwordValue.length; counter++)
+            {
+                var numericCharacterValue = passwordValue.charCodeAt(counter);
+                numericCharacterValue *= publicKey;
+                newPasswordBoxValue += numericCharacterValue + ",";
+            }
+            newPasswordBoxValue = newPasswordBoxValue.substring(0, newPasswordBoxValue.length - 1);
+            passwordBox.val(newPasswordBoxValue);
+            return true;
+        });
+    });
+
+</script>
+</body>
+
+
+</html>
